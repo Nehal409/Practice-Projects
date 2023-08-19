@@ -1,0 +1,10 @@
+1- How will we get data from sensors and IC (eg. MQTT) and in which format.
+   (eg. CSV, Real time ).
+2- If we are using two batteries will we be getting separate readings for
+   both batteries.
+3- Unit of readings (eg. Capacity of battery in mAh or Ah)
+4- What will be the time interval of the readings. (eg. 1s, 5s, etc)
+5- What is the capacity, minimum and maximum voltage of both batteries or
+   cells.
+6- Give me demo readings in a CSV file to test. (If possible)
+7- How will cell balancing be done. From the circuit or from the backend.

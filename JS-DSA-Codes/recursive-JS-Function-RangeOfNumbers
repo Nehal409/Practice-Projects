@@ -1,0 +1,47 @@
+function rangeOfNumbers(startNum, endNum) {
+  if (startNum > endNum) {
+    return []
+  }
+  const rangeCount = rangeOfNumbers(startNum, endNum-1)
+  rangeCount.push(endNum)
+  return rangeCount;
+};
+console.log(rangeOfNumbers(4, 6));
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Explanation:
+
+The provided code is a recursive JavaScript function called `rangeOfNumbers`, which generates an array containing a range of numbers from `startNum` to `endNum`, inclusive. The function uses recursion to build the array iteratively until it reaches the `endNum`.
+
+Here's a step-by-step explanation of the code:
+
+1. The function `rangeOfNumbers` takes two parameters: `startNum` (the starting number of the range) and `endNum` (the ending number of the range).
+
+2. The first check in the function is `if (startNum > endNum)`. If `startNum` is greater than `endNum`, it means that the range is invalid (i.e., there are no numbers between `startNum` and `endNum`). In this case, the function returns an empty array `[]`.
+
+3. If `startNum` is less than or equal to `endNum`, the function proceeds with the following steps:
+
+4. It recursively calls `rangeOfNumbers` with the parameters `startNum` and `endNum-1`. This recursive call generates an array containing numbers from `startNum` to `endNum-1`, inclusive, and stores it in the variable `rangeCount`.
+
+5. After the recursive call, the function pushes `endNum` (the current `endNum` value) to the `rangeCount` array.
+
+6. Finally, the function returns the `rangeCount` array, which now contains all the numbers from `startNum` to `endNum`, inclusive.
+
+Let's consider the example call `rangeOfNumbers(4, 6)`:
+
+- The function first checks if `4 > 6`, which is false, so it proceeds with the recursion.
+
+- It calls `rangeOfNumbers(4, 5)` and stores the result in `rangeCount`.
+
+- `rangeOfNumbers(4, 5)` in turn calls `rangeOfNumbers(4, 4)` and stores the result in `rangeCount`.
+
+- `rangeOfNumbers(4, 4)` calls `rangeOfNumbers(4, 3)`, and this time, `4 > 3` is false, so it returns an empty array `[]`.
+
+- `rangeOfNumbers(4, 4)` receives the empty array and pushes `4` to it, becoming `[4]`, and returns this array.
+
+- `rangeOfNumbers(4, 5)` receives `[4]` and pushes `5` to it, becoming `[4, 5]`, and returns this array.
+
+- Finally, `rangeOfNumbers(4, 6)` receives `[4, 5]` and pushes `6` to it, becoming `[4, 5, 6]`, and returns this array.
+
+The `console.log(rangeOfNumbers(4, 6))` statement outputs the array `[4, 5, 6]`.

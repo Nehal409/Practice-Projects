@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.3/socket.io.js"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script> -->
+<script src="https://cdn.socket.io/4.6.0/socket.io.min.js" integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
+<body>
+<canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+
+<script>
+
+const socket = io("http://localhost:9000");
+
+// socket.on("connect", () => {
+//     console.log("Connected to server");
+// });
+
+socket.on("join", () => {
+    console.log("Connected to server....");
+});
+
+socket.on("test", (data) => {
+    console.log("Server says:", data.message);
+});
+
+</script>
+
+</body>
+</html>

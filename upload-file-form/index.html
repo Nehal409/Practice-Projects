@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>Form Example</title>
+  <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+  <style>
+    /* CSS styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h1{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    form {
+      width: 300px;
+      margin: 0 auto;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    
+    input[type="text"],
+    input[type="file"],
+    textarea {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 26px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    #sub{
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Form Example</h1>
+  <form action="" method="post" id="form" enctype="multipart/form-data">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+    
+    <label for="channelRoute">Channel Route:</label>
+    <input type="text" id="channelRoute" name="channelRoute" required>
+    
+    <label for="thumbnail">Thumbnail:</label>
+    <input type="file" id="thumbnail" name="thumbnail" accept="image/*" required>
+    
+    <label for="description">Description:</label>
+    <textarea id="description" name="description" rows="4" required></textarea>
+    <div id="sub">
+      <input type="submit" value="Submit">
+    </div>
+    
+  </form>
+
+
+  <script>
+    const form = document.getElementById("form");
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
+  
+      const englishName = document.getElementById("name").value;
+      const channelRoute = document.getElementById("channelRoute").value;
+      const thumbnail = document.getElementById("thumbnail").files[0];
+      const description = document.getElementById("description").value;
+  
+      const formData = new FormData();
+      formData.append("englishName", englishName);
+      formData.append("channelRoute", channelRoute);
+      formData.append("thumbnail", thumbnail);
+      formData.append("description", description);
+      console.log(formData);
+  
+      try {
+        const res = await axios.post("http://localhost:3000/api/v1/channels", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        console.log(res.data);
+        form.reset();
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  </script>
+  
+</body>
+</html>

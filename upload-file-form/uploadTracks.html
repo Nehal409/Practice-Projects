@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>Form Example</title>
+  <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+  <style>
+    /* CSS styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h1{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    form {
+      width: 300px;
+      margin: 0 auto;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    
+    input[type="text"],
+    input[type="file"],
+    textarea {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 26px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    #sub{
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }   
+  </style>
+</head>
+<body>
+  <h1>Tracks Upload</h1>
+  <form action="" method="post" id="form" enctype="multipart/form-data">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+    
+    <label for="tracks">Track:</label>
+    <input type="file" id="tracks" name="tracks" accept="audio/*" required>
+    <div id="sub">
+      <input type="submit" value="Submit">
+    </div>
+    
+  </form>
+
+
+  <script>
+    const form = document.getElementById("form");
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
+  
+      const name = document.getElementById("name").value;
+      const src = document.getElementById("tracks").files[0];
+      console.log(src);
+      const id = 10;
+  
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("src", src);
+      console.log(formData);
+  
+      try {
+        const res = await axios.post(`http://localhost:3000/api/v1/channels/${id}/tracks`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        console.log(res.data);
+        form.reset();
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  </script>
+  
+</body>
+</html>

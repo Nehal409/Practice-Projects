@@ -1,0 +1,56 @@
+Table: Batteries
+        battery_id (Primary Key)
+        name
+        description
+        manufacturer
+        capacity
+        nominal_voltage
+
+Table: Battery_Cells
+        cell_id (Primary Key)
+        battery_id (Foreign Key to Batteries)
+        cell_number
+        nominal_capacity
+        nominal_voltage
+        current_capacity
+        current_voltage
+
+Table: Temperature_Logs
+        log_id (Primary Key)
+        cell_id (Foreign Key to Battery_Cells)
+        temperature
+        timestamp
+
+Table: Current_Logs
+        log_id (Primary Key)
+        cell_id (Foreign Key to Battery_Cells)
+        current
+        timestamp
+
+Table: Voltage_Logs
+        log_id (Primary Key)
+        cell_id (Foreign Key to Battery_Cells)
+        voltage
+        timestamp
+
+Table: State_of_Charge (SoC)
+        soc_id (Primary Key)
+        cell_id (Foreign Key to Battery_Cells)
+        temperature
+        current
+        voltage
+        timestamp
+        soc_value
+        overall_soc_id (Foreign Key to Overall_State_of_Charge) (Nullable)
+
+Table: Overall_State_of_Charge
+        overall_soc_id (Primary Key)
+        battery_id (Foreign Key to Batteries)
+        overall_soc_value
+        timestamp
+
+Table: Cell_Balancing
+        balancing_id (Primary Key)
+        cell_id (Foreign Key to Battery_Cells)
+        is_balancing (Boolean)
+        timestamp
